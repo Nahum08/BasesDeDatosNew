@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -19,7 +20,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     ListView lv;
-    public Contacto contactoParaEliminar;
+    public Contacto contactoParaEliminar,contactoSelect;
+
     Cursor cs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                                 }else{
                                     Toast.makeText(MainActivity.this, "error", Toast.LENGTH_SHORT).show();
                                 }
-
+                                onActivityResult(1000,-1,getIntent());
 
                             }
                         })
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         })
                         .setTitle("Confirmar")
-                        .setMessage("¿Eliminar a la mascota " + contactoParaEliminar.getUsuario() + "?")
+                        .setMessage(" " + contactoParaEliminar.getUsuario() + "?")
                         .create();
                 dialog.show();
                 return true;
@@ -73,8 +75,27 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        onActivityResult(1000,-1,getIntent());
+
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                List<Contacto> importar = dao.getAll();
+                contactoSelect = importar.get(i);
+
+                Intent intent
+                        = new Intent(MainActivity.this, Edita_contacto.class);
+                intent.putExtra("_id", contactoSelect.getId());
+                intent.putExtra("usuario", contactoSelect.getUsuario());
+                intent.putExtra("email", contactoSelect.getEmail());
+                intent.putExtra("telefono", contactoSelect.getTelefono());
+                intent.putExtra("fecha_nacimiento", contactoSelect.getFecha_nacimiento());
+                startActivityForResult(intent, 1000);
+            }
+        });
     }
+
 
     public void click_aceptar(View view) {
         Intent intent = new Intent(MainActivity.this,agregar.class);

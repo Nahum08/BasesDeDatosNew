@@ -38,6 +38,16 @@ SQLiteDatabase _sqLiteDatabase;
        return lst;
     }
 
+    public long update(Contacto contacto,String id){
+        ContentValues cv =
+                new ContentValues();
+        cv.put(MiDB.COLUMNS_CONTACTOS[1],contacto.getUsuario());
+        cv.put(MiDB.COLUMNS_CONTACTOS[2],contacto.getEmail());
+        cv.put(MiDB.COLUMNS_CONTACTOS[3],contacto.getTelefono());
+        cv.put(MiDB.COLUMNS_CONTACTOS[4],contacto.getFecha_nacimiento());
+        return _sqLiteDatabase.update(MiDB.TABLE_NAME_CONTACTOS,cv,"_id=?",new String[]{id});
+    }
+
 
         public  int delete(String ID)
         {
@@ -45,7 +55,6 @@ SQLiteDatabase _sqLiteDatabase;
             int numberOFEntriesDeleted= _sqLiteDatabase.delete(MiDB.TABLE_NAME_CONTACTOS, where, new String[]{ID}) ;
             return numberOFEntriesDeleted;
         }
-
 
     public Cursor getAllCursor(){
 

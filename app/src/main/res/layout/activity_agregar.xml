@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
 
-        android:text="Name" />
+         />
 
     <EditText
         android:id="@+id/txtEmail"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
 
-        android:text="Name" />
+        />
 
     <EditText
         android:id="@+id/txtTelefono"
@@ -28,14 +28,14 @@
         android:layout_height="wrap_content"
         android:ems="10"
 
-        android:text="Name" />
+         />
 
     <EditText
         android:id="@+id/txtFecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:text="Name" />
+         />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,11 +52,13 @@
             android:onClick="click_aceptar"/>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="CANCELAR" />
+            android:text="CANCELAR"
+            android:onClick="click_cancel"
+            />
     </LinearLayout>
 
 </LinearLayout>

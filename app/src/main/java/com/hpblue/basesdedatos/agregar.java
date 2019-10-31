@@ -38,5 +38,9 @@ public class agregar extends AppCompatActivity {
         Intent intent =  new Intent(this,MainActivity.class);
         startActivityForResult(intent,1000);
     }
+
+    public void click_cancel(View view) {
+
+    }
 }
 
